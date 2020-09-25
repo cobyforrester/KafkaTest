@@ -1,0 +1,19 @@
+Java 8 only requirement I believe
+
+to run: 6 terminals required (I know)
+
+clone repository
+
+All below need their own terminal, in this order, all found in RunCommands/
+./zookeeper.sh # sets up zookeeper server needed for kafka
+./kafka_server.sh # sets up kafka server
+./word_count_stream.sh # processes from input stream to count words/reduce to key:value (I believe)
+./kafka_server.sh # sets up kafka server
+./output_view.sh # sets up kafka server
+
+Now everything is setup, run ./producer_cust.sh to input custom values
+and run ./producer.sh to run the sample.txt file into the stream 
+to be processed on a new terminal
+
+cntl-c to quit for every terminal, run ./clean_env.sh to delete the logs and remove topic
+to have a fresh environment
