@@ -7,9 +7,9 @@ clone repository
 All below need their own terminal, in this order, all found in RunCommands/
 ./zookeeper.sh # sets up zookeeper server needed for kafka
 ./kafka_server.sh # sets up kafka server
+./create_topic.sh # creates the topic in question
 ./word_count_stream.sh # processes from input stream to count words/reduce to key:value (I believe)
-./kafka_server.sh # sets up kafka server
-./output_view.sh # sets up kafka server
+./output_view.sh # sets up something to read processed input
 
 Now everything is setup, run ./producer_cust.sh to input custom values
 and run ./producer.sh to run the sample.txt file into the stream 
