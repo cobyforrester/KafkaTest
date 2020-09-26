@@ -1,1 +1,0 @@
-cd ../kafka && rm -rf logs/

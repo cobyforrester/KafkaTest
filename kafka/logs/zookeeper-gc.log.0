@@ -1,0 +1,26 @@
+[2020-09-25T20:29:50.513+0800][gc,heap] Heap region size: 1M
+[2020-09-25T20:29:50.513+0800][gc,heap,coops] Heap address: 0x00000007e0000000, size: 512 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+[2020-09-25T20:29:50.520+0800][gc           ] Using G1
+[2020-09-25T20:29:50.521+0800][gc,cds       ] Mark closed archive regions in map: [0x00000007fff00000, 0x00000007fff7aff8]
+[2020-09-25T20:29:50.522+0800][gc,cds       ] Mark open archive regions in map: [0x00000007ffe00000, 0x00000007ffe50ff8]
+[2020-09-25T20:29:50.543+0800][gc           ] Periodic GC disabled
+[2020-09-25T20:29:55.385+0800][gc,start     ] GC(0) Pause Young (Normal) (G1 Evacuation Pause)
+[2020-09-25T20:29:55.386+0800][gc,task      ] GC(0) Using 4 workers of 4 for evacuation
+[2020-09-25T20:29:55.394+0800][gc,phases    ] GC(0)   Pre Evacuate Collection Set: 0.1ms
+[2020-09-25T20:29:55.394+0800][gc,phases    ] GC(0)   Merge Heap Roots: 0.0ms
+[2020-09-25T20:29:55.394+0800][gc,phases    ] GC(0)   Evacuate Collection Set: 7.8ms
+[2020-09-25T20:29:55.394+0800][gc,phases    ] GC(0)   Post Evacuate Collection Set: 0.4ms
+[2020-09-25T20:29:55.394+0800][gc,phases    ] GC(0)   Other: 0.4ms
+[2020-09-25T20:29:55.394+0800][gc,heap      ] GC(0) Eden regions: 25->0(21)
+[2020-09-25T20:29:55.394+0800][gc,heap      ] GC(0) Survivor regions: 0->4(4)
+[2020-09-25T20:29:55.394+0800][gc,heap      ] GC(0) Old regions: 0->2
+[2020-09-25T20:29:55.394+0800][gc,heap      ] GC(0) Archive regions: 2->2
+[2020-09-25T20:29:55.394+0800][gc,heap      ] GC(0) Humongous regions: 0->0
+[2020-09-25T20:29:55.394+0800][gc,metaspace ] GC(0) Metaspace: 7333K(7680K)->7333K(7680K) NonClass: 6486K(6656K)->6486K(6656K) Class: 846K(1024K)->846K(1024K)
+[2020-09-25T20:29:55.394+0800][gc           ] GC(0) Pause Young (Normal) (G1 Evacuation Pause) 25M->6M(512M) 9.077ms
+[2020-09-25T20:29:55.394+0800][gc,cpu       ] GC(0) User=0.02s Sys=0.00s Real=0.01s
+[2020-09-25T22:20:40.375+0800][gc,heap,exit ] Heap
+[2020-09-25T22:20:40.375+0800][gc,heap,exit ]  garbage-first heap   total 524288K, used 12334K [0x00000007e0000000, 0x0000000800000000)
+[2020-09-25T22:20:40.375+0800][gc,heap,exit ]   region size 1024K, 11 young (11264K), 4 survivors (4096K)
+[2020-09-25T22:20:40.376+0800][gc,heap,exit ]  Metaspace       used 7762K, capacity 7987K, committed 8192K, reserved 1056768K
+[2020-09-25T22:20:40.376+0800][gc,heap,exit ]   class space    used 861K, capacity 963K, committed 1024K, reserved 1048576K
