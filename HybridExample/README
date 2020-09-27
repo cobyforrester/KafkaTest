@@ -1,0 +1,4 @@
+# START ZOOKEEPER/KAFKA
+docker-compose -f docker-compose.yml up -d  
+
+#START MONGODB    
