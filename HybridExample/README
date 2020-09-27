@@ -1,4 +1,15 @@
-# START ZOOKEEPER/KAFKA
+# START ZOOKEEPER/KAFKA/MONGO/CONNECTOR
 docker-compose -f docker-compose.yml up -d  
 
-#START MONGODB    
+
+curl -X PUT http://localhost:8083/connectors/source-mongodb-inventory/config -H "Content-Type: application/json" -d '{
+      "tasks.max":1,
+      "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
+      "key.converter":"org.apache.kafka.connect.storage.StringConverter",
+      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
+      "connection.uri":"<>",
+      "database":"names",
+      "collection":"inventory",
+      "pipeline":"[{\"$match\": { \"$and\": [ { \"updateDescription.updatedFields.quantity\" : { \"$lte\": 5 } }, {\"operationType\": \"update\"}]}}]", 
+      "topic.prefix": ""
+}'
