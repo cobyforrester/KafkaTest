@@ -4,6 +4,8 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
+    ports:
+      - 2181:2181
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -37,7 +39,7 @@ services:
     image: confluentinc/cp-schema-registry:latest
     container_name: schema-registry
     ports:
-      - "8081:8081"
+      - 8081:8081
     depends_on:
       - zookeeper
       - kafka
@@ -55,12 +57,14 @@ services:
     ports:
       - 8083:8083
     environment:
-      CONNECT_BOOTSTRAP_SERVERS: "kafka:9092"
+      CONNECT_BOOTSTRAP_SERVERS: "kafka:29092"
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: kafka-connect
+      #Connect stores config, status, and offsets of the connectors
       CONNECT_CONFIG_STORAGE_TOPIC: _connect-configs
       CONNECT_OFFSET_STORAGE_TOPIC: _connect-offsets
       CONNECT_STATUS_STORAGE_TOPIC: _connect-status
+
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
@@ -73,16 +77,18 @@ services:
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
-      CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars
+      CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-jars,/etc/kafka-connect/jars
     #volumes:
     #  - $PWD/data:/data
-    # In the command section, $ are replaced with $$ to avoid the error 'Invalid interpolation format for "command" option'
+
     command:
       - bash
       - -c
       - |
         echo "Installing Connector"
         confluent-hub install --no-prompt debezium/debezium-connector-mongodb:latest
+        confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:latest
+        confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
         #
         echo "Launching Kafka Connect worker"
         /etc/confluent/docker/run &
@@ -95,18 +101,18 @@ services:
     ports:
       - "27017:27017"
 
-  kafkacat:
-    image: edenhill/kafkacat:1.5.0
-    container_name: kafkacat
-    links:
-      - kafka
-      - schema-registry
-    entrypoint: 
-      - /bin/sh 
-      - -c 
-      - |
-        apk add jq; 
-        while [ 1 -eq 1 ];do sleep 60;done
+  # kafkacat:
+  #   image: edenhill/kafkacat:1.5.0
+  #   container_name: kafkacat
+  #   links:
+  #     - kafka
+  #     - schema-registry
+  #   entrypoint: 
+  #     - /bin/sh 
+  #     - -c 
+  #     - |
+  #       apk add jq; 
+  #       while [ 1 -eq 1 ];do sleep 60;done
 
   # ksqldb:
   #   # *-----------------------------*

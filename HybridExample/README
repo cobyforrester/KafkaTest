@@ -1,15 +1,37 @@
-# START ZOOKEEPER/KAFKA/MONGO/CONNECTOR
-docker-compose -f docker-compose.yml up -d  
+Requirements: Docker, Docker Compose, node/npm
+2 terminals needed in this directory ie. HybridExample/
+
+# START ZOOKEEPER/KAFKA/MONGO/CONNECTOR/CONSUMER/PRODUCER
+1. run: docker-compose -f docker-compose.yml up -d  
+2. wait 5-10 seconds
+3. run: cd JS/
+4. run: node topic.js #creates topic
+5. run: node consumer.js #makes listener for topic that is adding entries to mongo database
+6. new terminal
+7. run: node producer.js <ANY WORD HERE>
+8. check consumer terminal for output
+
+# Check running mongodb db for consumer input
+1. run: mongo localhost:27017
+2. run: show dbs # check if db created
+3. run: use kafka
+4. run: db.words.find().pretty()
 
 
-curl -X PUT http://localhost:8083/connectors/source-mongodb-inventory/config -H "Content-Type: application/json" -d '{
-      "tasks.max":1,
-      "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
-      "key.converter":"org.apache.kafka.connect.storage.StringConverter",
-      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
-      "connection.uri":"<>",
-      "database":"names",
-      "collection":"inventory",
-      "pipeline":"[{\"$match\": { \"$and\": [ { \"updateDescription.updatedFields.quantity\" : { \"$lte\": 5 } }, {\"operationType\": \"update\"}]}}]", 
-      "topic.prefix": ""
+
+
+# Worry about later (for kafka connect)
+curl -X PUT http://localhost:8083/connectors/sink-mongodb-users/config -H "Content-Type: application/json" -d ' {
+      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+      "tasks.max":"1",
+      "topics":"Names",
+      "connection.uri":"mongodb://mongodb",
+      "database":"connect",
+      "collection":"collec",
+      "key.converter":"org.apache.kafka.connect.json.JsonConverter",
+      "key.converter.schemas.enable":false,
+      "value.converter":"org.apache.kafka.connect.json.JsonConverter",
+      "value.converter.schemas.enable":false
+
 }'
+

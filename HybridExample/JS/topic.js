@@ -12,7 +12,7 @@ const run = async () => {
     await admin.createTopics({
       topics: [
         {
-          topic: "Names",
+          topic: "words",
           numPartitions: 2,
         },
       ],

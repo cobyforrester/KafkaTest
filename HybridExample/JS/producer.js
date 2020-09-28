@@ -21,7 +21,7 @@ const run = async () => {
     }, 0);
     const partition = hash % 2 == 0 ? 0 : 1;
     const result = await producer.send({
-      topic: "Names",
+      topic: "words",
       messages: [
         {
           value: msg,
