@@ -5,11 +5,12 @@ Requirements: Docker, Docker Compose, node/npm
 1. run: docker-compose -f docker-compose.yml up -d  
 2. wait 5-10 seconds
 3. run: cd JS/
-4. run: node topic.js #creates topic
-5. run: node consumer.js #makes listener for topic that is adding entries to mongo database
-6. new terminal
-7. run: node producer.js <ANY WORD HERE>
-8. check consumer terminal for output
+4. run npm install # installs dependencies, just kafka here
+5. run: node topic.js #creates topic
+6. run: node consumer.js #makes listener for topic that is adding entries to mongo database
+7. new terminal
+8. run: node producer.js <ANY WORD HERE>
+9. check consumer terminal for output
 
 # Check running mongodb db for consumer input
 1. run: mongo localhost:27017
