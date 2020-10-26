@@ -42,7 +42,7 @@ import java.util.concurrent.CountDownLatch;
  * {@code bin/kafka-topics.sh --create ...}), and write some data to the input topic (e.g. via
  * {@code bin/kafka-console-producer.sh}). Otherwise you won't see any data arriving in the output topic.
  */
-public final class WordCountDemo {
+public final class CountWords {
 
     public static final String INPUT_TOPIC = "streams-plaintext-input";
     public static final String OUTPUT_TOPIC = "streams-wordcount-output";
